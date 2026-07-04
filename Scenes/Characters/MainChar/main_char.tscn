@@ -44,6 +44,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:can_be_damaged")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_enp47"]
 resource_name = "attack1"
@@ -264,7 +276,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_irg7s"]
-states/Start/position = Vector2(201, 100)
+states/Start/position = Vector2(201.66667, 99.77778)
 states/attack1/node = SubResource("AnimationNodeAnimation_b530t")
 states/attack1/position = Vector2(474, 272)
 states/attack2/node = SubResource("AnimationNodeAnimation_ookxt")
@@ -284,10 +296,8 @@ collision_layer = 2
 collision_mask = 37
 motion_mode = 1
 script = ExtResource("1_j015v")
-enable_invulnerability_window = true
 movement_speed = 200.0
 mana_regeneration = 5.0
-can_be_damaged = false
 animation_speed_scale = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=640558664]
