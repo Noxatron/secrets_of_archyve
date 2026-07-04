@@ -6,9 +6,11 @@ extends Entity
 @onready var raycast_particle:RayCast2D=$Sprite2D/ParticleRayCast
 @onready var particle_spawner=$ParticleSpawner
 @onready var particle_spawn_place:Node2D=$Sprite2D/ParticleSpawn
+
 var current_dir:Vector2
 
 func _ready():
+	movement_enabled=true
 	animation_tree=get_node("AnimationTree") as AnimationTree
 	if animation_tree==null:
 		print_debug("animation tree is null")
@@ -18,7 +20,7 @@ func _ready():
 
 func _physics_process(delta):
 	animation_tree.advance(delta*animation_speed_scale)
-	if !movement_enabled or player==null:
+	if not movement_enabled or player==null:
 		return
 	var dir=to_local(navigation_agent.get_next_path_position()).normalized()
 	current_dir=dir

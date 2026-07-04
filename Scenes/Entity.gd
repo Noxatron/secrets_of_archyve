@@ -25,7 +25,7 @@ var invulnerability_window_active=false
 @export var dash_duration:float=0.1
 
 @export var movement_enabled:bool = true
-		
+
 @export var can_be_damaged:bool=true
 
 @export var single_coin_value:int=5

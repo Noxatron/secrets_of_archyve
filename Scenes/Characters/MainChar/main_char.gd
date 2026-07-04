@@ -14,6 +14,7 @@ func _ready():
 	get_tree().call_group("skeletons","set_player",self)
 	hp_bar=self.get_node("HPBar") as TextureProgressBar
 	mana_bar=self.get_node("ManaBar") as TextureProgressBar
+	movement_enabled = true
 	print_debug("test")
 	init_hp()
 	init_mana()

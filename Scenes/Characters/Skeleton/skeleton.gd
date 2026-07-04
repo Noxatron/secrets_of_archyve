@@ -5,6 +5,7 @@ extends Entity
 @onready var raycast:RayCast2D=$Sprite2D/RayCast2D
 
 func _ready():
+	movement_enabled=true
 	animation_tree=get_node("AnimationTree") as AnimationTree
 	state_machine=animation_tree.get("parameters/playback")
 	hp_bar=self.get_node("HPBar") as TextureProgressBar
@@ -12,7 +13,7 @@ func _ready():
 
 func _physics_process(delta):
 	animation_tree.advance(delta*animation_speed_scale)
-	if !movement_enabled or player==null:
+	if not movement_enabled or player==null:
 		return
 	var dir=to_local(navigation_agent.get_next_path_position()).normalized()
 	velocity=dir*movement_speed

@@ -32,6 +32,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:movement_enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_enp47"]
 resource_name = "attack1"
@@ -92,7 +104,7 @@ tracks/1/path = NodePath(".:movement_enabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0.033333335, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -260,7 +272,7 @@ states/attack2/position = Vector2(812, 184)
 states/attack_ultimate/node = SubResource("AnimationNodeAnimation_ewtvu")
 states/attack_ultimate/position = Vector2(652, 245)
 states/idle/node = SubResource("AnimationNodeAnimation_66gjp")
-states/idle/position = Vector2(519, 81)
+states/idle/position = Vector2(518.3333, 81)
 states/parry/node = SubResource("AnimationNodeAnimation_x63k5")
 states/parry/position = Vector2(297, 197)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_gybjq"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_l2g2i"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_q7obd"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_um1aw"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_lps2a"), "idle", "attack_ultimate", SubResource("AnimationNodeStateMachineTransition_dbesc"), "attack_ultimate", "idle", SubResource("AnimationNodeStateMachineTransition_ddmrx"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_7kxoj"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_6xkqp")]
