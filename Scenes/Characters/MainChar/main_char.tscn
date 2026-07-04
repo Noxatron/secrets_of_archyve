@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cdo2ams6wne1s" path="res://Scenes/UI/mana_bar.tscn" id="6_cvrj4"]
 [ext_resource type="PackedScene" uid="uid://dlx57dubebpb0" path="res://Scenes/Particles/particle_spawner.tscn" id="9_f2b4f"]
 [ext_resource type="PackedScene" uid="uid://5dtaxd7bsee4" path="res://Scenes/Particles/ElectricEarthquake/ElectricEarthquake.tscn" id="10_midgt"]
+[ext_resource type="Script" uid="uid://bt5nag3nc8qiv" path="res://Assets/Camera/Camera.gd" id="11_camzoom"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_faafu"]
 size = Vector2(8.5, 20)
@@ -317,6 +318,7 @@ collision_mask = 273
 position_smoothing_speed = 2.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+script = ExtResource("11_camzoom")
 
 [node name="HPBar" parent="." unique_id=1478299486 instance=ExtResource("4_1axw7")]
 offset_left = -16.0
