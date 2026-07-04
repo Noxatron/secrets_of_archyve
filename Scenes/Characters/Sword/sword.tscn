@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbhaoflc147ll"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/Sword/sword.gd" id="1_65151"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81oyq"]
+size = Vector2(34.5, 28)
+
+[node name="Weapon" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_65151")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, -7)
+shape = SubResource("RectangleShape2D_81oyq")
+disabled = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

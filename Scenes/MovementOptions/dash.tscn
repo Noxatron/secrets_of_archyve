@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cufgnvs8t6em0"]
+
+[sub_resource type="GDScript" id="GDScript_qq3jj"]
+script/source = "extends Node
+
+@onready var timer=$DashTimer
+
+func start_dash(duration:float):
+	timer.wait_time=duration
+	timer.start()
+	
+func is_dashing():
+	#print(timer.time_left)
+	return !timer.is_stopped()
+"
+
+[node name="Dash" type="Node" unique_id=1549834095]
+script = SubResource("GDScript_qq3jj")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=944195746]
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

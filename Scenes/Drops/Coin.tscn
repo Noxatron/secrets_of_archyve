@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cghjj12srssg7"]
+
+[ext_resource type="Script" path="res://Scenes/Drops/Coin.gd" id="1_ntdy4"]
+[ext_resource type="Texture2D" uid="uid://c8425wa6nsav0" path="res://Assets/Drops/coin.png" id="1_rp2p7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nqjr8"]
+
+[node name="Coin" type="Node2D"]
+
+[node name="CoinArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 66
+script = ExtResource("1_ntdy4")
+
+[node name="Sprite2D" type="Sprite2D" parent="CoinArea"]
+texture = ExtResource("1_rp2p7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinArea"]
+shape = SubResource("RectangleShape2D_nqjr8")
+
+[connection signal="area_entered" from="CoinArea" to="CoinArea" method="_on_area_entered"]

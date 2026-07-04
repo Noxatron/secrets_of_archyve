@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3 uid="uid://cd8x23bjcpsvj"]
+
+[ext_resource type="Script" path="res://Scenes/Particles/PurpleEnergyOrb/PurpleEnergyOrb.gd" id="1_3ds74"]
+[ext_resource type="Texture2D" uid="uid://d61cqx44hqfb" path="res://Assets/Particles/PurpleEnergyOrb/purple_charge.png" id="1_7xmmp"]
+[ext_resource type="PackedScene" uid="uid://cbhaoflc147ll" path="res://Scenes/Characters/Sword/sword.tscn" id="3_0x30h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gimy5"]
+radius = 3.0
+
+[sub_resource type="Animation" id="Animation_2sssy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gq0ge"]
+resource_name = "active"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_gtgvd"]
+resource_name = "init"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_collision_enabled"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:can_move")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pholj"]
+_data = {
+"RESET": SubResource("Animation_2sssy"),
+"active": SubResource("Animation_gq0ge"),
+"init": SubResource("Animation_gtgvd")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_25md1"]
+animation = &"active"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ji18t"]
+animation = &"init"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hls4p"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nxidi"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_56hrw"]
+states/active/node = SubResource("AnimationNodeAnimation_25md1")
+states/active/position = Vector2(673, 43)
+states/init/node = SubResource("AnimationNodeAnimation_ji18t")
+states/init/position = Vector2(514, 50)
+transitions = ["Start", "init", SubResource("AnimationNodeStateMachineTransition_hls4p"), "init", "active", SubResource("AnimationNodeStateMachineTransition_nxidi")]
+
+[node name="PurpleEnergyOrb" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 586
+script = ExtResource("1_3ds74")
+direction = Vector2(1, 1)
+can_move = true
+animation_speed_scale = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gimy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7xmmp")
+hframes = 23
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pholj")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_process = 2
+tree_root = SubResource("AnimationNodeStateMachine_56hrw")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Weapon" parent="." instance=ExtResource("3_0x30h")]
+position = Vector2(0, 3)
+scale = Vector2(0.439493, 0.460126)
+collision_layer = 256
+collision_mask = 72
+damage = 50.0
+shock_duration = 0.2
+damage_effect = 1
+self_destruct_upon_collision = true
+
+[node name="Lifespan" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="destroy_self" from="Weapon" to="." method="_on_weapon_destroy_self"]
+[connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
