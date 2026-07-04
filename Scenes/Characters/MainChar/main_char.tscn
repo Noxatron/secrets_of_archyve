@@ -274,7 +274,6 @@ script = ExtResource("1_j015v")
 enable_invulnerability_window = true
 movement_speed = 200.0
 mana_regeneration = 5.0
-movement_enabled = false
 can_be_damaged = false
 animation_speed_scale = 2
 
